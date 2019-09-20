@@ -60,6 +60,3 @@ def main(id):
     # text = '\n'.join({i[0].text for i in gundem[0]})
     # print(text)
     # bot.send_message(-1001309568370, text)
-
-
-main(TelegramBot.Bot.KARINT_ID)
