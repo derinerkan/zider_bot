@@ -1,6 +1,7 @@
 import TelegramBot
 import time
 import random
+import EksiParser
 
 
 def main():
@@ -14,7 +15,14 @@ def main():
             if 'message' in i.keys():
                 id = i['message']['chat']['id']
                 text = reply()
-                if id != -1001309568370:
+                if 'text' in i['message'].keys() and i['message']['text'] == '/info':
+                    bot.send_message(id, "https://eksisozluk.com/ziya-ider--427567")
+                    bot.send_message(id, "Henüz özelliklerin çoğu implement edilmedi, komut yazmayın. Özel mesajları siklerim grupları siklemem.")
+                    bot.send_message(id, "Yoklamaya imza atmayın sikerim")
+                    print(str(id) + 'chatine bilgi mesajı gönderildi')
+                elif 'text' in i['message'].keys() and i['message']['text'] == '/eksi':
+                    EksiParser.main(id)
+                elif ('text' in i['message'].keys() and i['message']['text'] == '/random') or id > 0:
                     bot.send_message(id, text)
                     print('Mesaj gönderildi:' + text + ' Alan kanal: ' + str(id))
                 if 'from' in i['message'].keys():

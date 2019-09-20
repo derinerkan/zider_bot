@@ -20,7 +20,8 @@ class MyHTMLParser(HTMLParser):
 
 def puanla(string):
     keywords = ('rakı', 'kadın', 'kız', 'erkek', 'erkeğ', 'efendi', 'piç', 'yanlız', 'yalnız', 'seviş', 'ayak', 'hatun',
-                'güzel', 'tipsiz', 'hatun', 'brad pitt', 'haram', 'popo', 'kezban', 'tayt', 'çirkin', 'sivas' )
+                'güzel', 'tipsiz', 'hatun', 'brad pitt', 'haram', 'popo', 'kezban', 'tayt', 'çirkin', 'sivas', 'seks',
+                "30 yaş üstü", )
     score = 0
     for key in keywords:
         exp = '.' + key + '.'
@@ -34,7 +35,7 @@ def tuple_puanla(item):
     return item[2]
 
 
-def main():
+def main(id):
     url = 'https://eksisozluk.com/basliklar/gundem'
     page = requests.get(url, headers={'User-agent': 'Mozilla/5.0'})
     tree = html.fromstring(page.content)
@@ -55,9 +56,10 @@ def main():
 
     bot = TelegramBot.Bot()
     print('https://eksisozluk.com' + max(basliklar, key=lambda p: p[2])[1])
-    print(bot.send_message(bot.KARINT_ID, 'https://eksisozluk.com' + max(basliklar, key=lambda p: p[2])[1]))
+    print(bot.send_message(id, 'https://eksisozluk.com' + max(basliklar, key=lambda p: p[2])[1]))
     # text = '\n'.join({i[0].text for i in gundem[0]})
     # print(text)
     # bot.send_message(-1001309568370, text)
 
-main()
+
+main(TelegramBot.Bot.KARINT_ID)
